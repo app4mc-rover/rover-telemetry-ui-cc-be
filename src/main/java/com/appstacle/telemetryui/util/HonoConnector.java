@@ -13,7 +13,7 @@
  * *****************************************************************************
  */
 
-package com.appstacle.telemetryui.cloud_connection;
+package com.appstacle.telemetryui.util;
 
 import org.eclipse.hono.client.HonoClient;
 import org.eclipse.hono.client.MessageConsumer;
@@ -43,9 +43,7 @@ public class HonoConnector {
 	/* vertx instance opened to connect to Hono Messaging, needs to be closed */
 	private final Vertx vertx = Vertx.vertx();
 
-	/*
-	 * client used to connect to the Hono Messaging Service to receive new messages
-	 */
+	 /* client used to connect to the Hono Messaging Service to receive new messages */
 	private final HonoClient honoClient;
 
 	/* current number of reconnects so far */
@@ -118,11 +116,6 @@ public class HonoConnector {
 		SpringApplication.exit(appContext, () -> 0);
 	}
 
-	/*
-	 * @Override public void run(final ApplicationArguments applicationArguments) {
-	 * // start with the initial connect to Hono connectToHonoMessaging(); }
-	 */
-
 	/**
 	 * Connects to Hono Messaging using the options and event handler initialized in
 	 * the constructor. In case of a exception the client tries the next reconnect.
@@ -139,22 +132,4 @@ public class HonoConnector {
 		}
 		return null;
 	}
-
-	/*
-	public void sendCommand(final Future<HonoClient> clientFuture, Command cmd) {
-		clientFuture.map(client -> {
-			client.getOrCreateCommandClient(honoTenantID, honoDeviceID).map(commandClient -> {
-				commandClient.sendCommand(cmd.getCommand(), "test", Buffer.buffer(cmd.getPayload()));
-				return commandClient;
-			});
-			return client;
-		});
-	}
-
-	public void sendCommand(final HonoClient client, Command cmd) {
-		client.getOrCreateCommandClient(honoTenantID, honoDeviceID).map(commandClient -> {
-			commandClient.sendCommand(cmd.getCommand(), "test", Buffer.buffer(cmd.getPayload()));
-			return commandClient;
-		});
-	}*/
 }

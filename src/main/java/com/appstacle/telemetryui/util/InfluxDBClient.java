@@ -1,8 +1,6 @@
-
-
 /*
  * ******************************************************************************
- * Copyright (c) 2017, 2019 Bosch Software Innovations GmbH.
+* Copyright (c) 2017, 2019 Bosch Software Innovations GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
@@ -14,7 +12,7 @@
  *      Leon Graser (Bosch Software Innovations GmbH)
  * *****************************************************************************
  */
-package com.appstacle.telemetryui.cloud_connection;
+package com.appstacle.telemetryui.util;
 
 import org.influxdb.InfluxDB;
 import org.influxdb.InfluxDBFactory;
@@ -48,7 +46,8 @@ public class InfluxDBClient {
 	 * @throws MalformedURLException throws exception if the given url is in the
 	 *                               wrong format
 	 */
-	public InfluxDBClient(@Value("${influxdb.url}") final String influxURL, @Value("${influxdb.db.name}") String dbName) throws MalformedURLException {
+	public InfluxDBClient(@Value("${influxdb.url}") final String influxURL, @Value("${influxdb.db.name}") String dbName)
+			throws MalformedURLException {
 		this.dbName = dbName;
 
 		// check the given url string
@@ -58,19 +57,8 @@ public class InfluxDBClient {
 		LOGGER.info("will connect to InfluxDB server at {} and database {} ", influxURL, dbName);
 	}
 
-	public QueryResult getTelemetryData(String honoDeviceId) {
-		Query query = new Query("SELECT ultrasonic FROM " + honoDeviceId + " where time > now() - 5s", dbName);
-		return influxDB.query(query);
-	}
-
-	
-	public QueryResult getAllTelemetryData(String honoDeviceId) {
-		Query query = new Query("SELECT LAST(*) FROM " + honoDeviceId + "", dbName);
-		return influxDB.query(query);
-	}
-
-	public QueryResult getTelemetryData(String deviceID, String dbName) {
-		Query query = new Query("SELECT * FROM " + deviceID, dbName);
+	public QueryResult getLatestTelemetryData(String honoDeviceId) {
+		Query query = new Query("SELECT * FROM " + honoDeviceId + " ORDER BY time desc limit 1", dbName);
 		return influxDB.query(query);
 	}
 }

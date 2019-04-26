@@ -11,36 +11,26 @@
  * Contributors:
  *     Dortmund University of Applied Sciences and Arts - initial API and implementation
  *******************************************************************************/
-package com.appstacle.telemetryui.payload;
-
-import java.time.LocalDateTime;
+package com.appstacle.telemetryui.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class RoverTelemetry {
-    public RoverTelemetry(LocalDateTime timestamp, Cores cores2, Gy521 gy5212, Hmc5883l hmc5883l2, Infrared infrared2,
-			Ultrasonic ultrasonic2) {
-		time=timestamp;
-		cores=cores2;
-		gy521=gy5212;
-		hmc5883l=hmc5883l2;
-		infrared=infrared2;
-		ultrasonic=ultrasonic2;
-		
+@AllArgsConstructor
+@Getter
+@Setter
+public class CommandDTO {
+	private String commandType;
+	private int speed;
+
+	public String getCommandType() {
+		return commandType;
 	}
-	public RoverTelemetry() {
+
+	public int getSpeed() {
+		return speed;
 	}
-	
-	LocalDateTime time;
-    Cores cores;
-    Gy521 gy521;
-    Hmc5883l hmc5883l;
-    Infrared infrared;
-    Ultrasonic ultrasonic;
 }

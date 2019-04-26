@@ -26,12 +26,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.appstacle.telemetryui.payload.CommandTelegram;
-import com.appstacle.telemetryui.payload.RoverTelemetry;
-import com.appstacle.telemetryui.service.HonoService;
+import com.appstacle.telemetryui.dto.CommandDTO;
+import com.appstacle.telemetryui.dto.RoverDTO;
+import com.appstacle.telemetryui.service.CommandControlService;
 import com.appstacle.telemetryui.service.TelemetryService;
 
-// @CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping(path = "/rover")
 public class RoverController {
@@ -39,7 +38,7 @@ public class RoverController {
 	private static final Logger log = LoggerFactory.getLogger(RoverController.class);
 
 	@Autowired
-	private HonoService honoService;
+	private CommandControlService commandService;
 
 	@Autowired
 	private TelemetryService telemetryService;
@@ -48,25 +47,22 @@ public class RoverController {
 	 * This function returns the lastest telemetry entry of the database on request
 	 */
 	@GetMapping(path = "{roverID}/telemetry")
-	public RoverTelemetry getTelemetry(@PathVariable final String roverID) {
-		return this.telemetryService.getTelemetry(roverID);
+	public RoverDTO getLatestTelemetry(@PathVariable final String roverID) {
+		return this.telemetryService.getTelemetryData(roverID);
 	}
-
-	@GetMapping(path = "/rovers")
-	public RoverTelemetry getTelemetryById(@PathVariable final String id) {
-		return this.telemetryService.getAllRoverTelemetry();
-	}
-
 
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping(path = "/{roverID}/command-control")
-	public ResponseEntity<String> doCommandControl(@RequestBody final CommandTelegram commandTelegram,
+	public ResponseEntity<String> sendCommand(@RequestBody final CommandDTO command,
 			@PathVariable final String roverID) {
-		log.info("doCommand " + commandTelegram.getCommand() + " - " + commandTelegram.getSpeed() + " " + roverID);
+		log.info("Command received: Type " + command.getCommandType() + " - Speed: " + command.getSpeed() + " - Rover: "
+				+ roverID);
 
-		this.honoService.sendCommand(roverID, commandTelegram);
+		System.out.println("Command received: Type " + command.getCommandType() + " - Speed: " + command.getSpeed()
+				+ " - Rover: " + roverID);
+
+		commandService.sendCommand(roverID, command);
 
 		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 	}
-
 }
