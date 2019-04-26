@@ -1,3 +1,5 @@
+Credits for initial implementations to [huigc001](https://github.com/huigc001)
+
 # cloud-application-telemetry-ui-backend with Hono C&C
 
 ## Implemented REST-API
