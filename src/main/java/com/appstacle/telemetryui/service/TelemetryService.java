@@ -59,10 +59,8 @@ public class TelemetryService {
 
 		if (result.getResults().get(0).getSeries() != null) {
 			InfluxDBResultMapper resultMapper = new InfluxDBResultMapper();
-			//System.out.println("Result:" + result.getResults());
 			List<RoverDTO> roverDTOs = resultMapper.toPOJO(result, RoverDTO.class);
 			for (RoverDTO roverDTO : roverDTOs) {
-				//System.out.println("DTO:" + roverDTO);
 				return roverDTO;
 			}
 		}

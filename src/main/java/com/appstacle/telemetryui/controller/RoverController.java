@@ -55,11 +55,8 @@ public class RoverController {
 	@PostMapping(path = "/{roverID}/command-control")
 	public ResponseEntity<String> sendCommand(@RequestBody final CommandDTO command,
 			@PathVariable final String roverID) {
-		log.info("Command received: Type " + command.getCommandType() + " - Speed: " + command.getSpeed() + " - Rover: "
+		log.info("Command received: Type " + command.getCommand() + " - Speed: " + command.getSpeed() + " - Rover: "
 				+ roverID);
-
-		System.out.println("Command received: Type " + command.getCommandType() + " - Speed: " + command.getSpeed()
-				+ " - Rover: " + roverID);
 
 		commandService.sendCommand(roverID, command);
 

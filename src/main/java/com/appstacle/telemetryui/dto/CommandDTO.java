@@ -23,11 +23,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CommandDTO {
-	private String commandType;
+	private String command;
 	private int speed;
 
-	public String getCommandType() {
-		return commandType;
+	public String getCommand() {
+		return command;
 	}
 
 	public int getSpeed() {

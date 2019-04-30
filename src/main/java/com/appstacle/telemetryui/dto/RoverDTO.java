@@ -32,7 +32,7 @@ public class RoverDTO {
 	private String core3;
 	@Column(name = "cores-core3")
 	private String core4;
-	
+
 	@Column(name = "gy521-accel-x")
 	private String accelX;
 	@Column(name = "gy521-accel-y")
@@ -72,126 +72,167 @@ public class RoverDTO {
 	public Instant getTime() {
 		return time;
 	}
+
 	public void setTime(Instant time) {
 		this.time = time;
 	}
+
 	public String getCore1() {
 		return core1;
 	}
+
 	public void setCore1(String core1) {
 		this.core1 = core1;
 	}
+
 	public String getCore2() {
 		return core2;
 	}
+
 	public void setCore2(String core2) {
 		this.core2 = core2;
 	}
+
 	public String getCore3() {
 		return core3;
 	}
+
 	public void setCore3(String core3) {
 		this.core3 = core3;
 	}
+
 	public String getCore4() {
 		return core4;
 	}
+
 	public void setCore4(String core4) {
 		this.core4 = core4;
 	}
+
 	public String getAccelX() {
 		return accelX;
 	}
+
 	public void setAccelX(String accelX) {
 		this.accelX = accelX;
 	}
+
 	public String getAccelY() {
 		return accelY;
 	}
+
 	public void setAccelY(String accelY) {
 		this.accelY = accelY;
 	}
+
 	public String getAccelZ() {
 		return accelZ;
 	}
+
 	public void setAccelZ(String accelZ) {
 		this.accelZ = accelZ;
 	}
+
 	public String getAngleX() {
 		return angleX;
 	}
+
 	public void setAngleX(String angleX) {
 		this.angleX = angleX;
 	}
+
 	public String getAngleY() {
 		return angleY;
 	}
+
 	public void setAngleY(String angleY) {
 		this.angleY = angleY;
 	}
+
 	public String getAngleZ() {
 		return angleZ;
 	}
+
 	public void setAngleZ(String angleZ) {
 		this.angleZ = angleZ;
 	}
+
 	public String getGyroX() {
 		return gyroX;
 	}
+
 	public void setGyroX(String gyroX) {
 		this.gyroX = gyroX;
 	}
+
 	public String getGyroY() {
 		return gyroY;
 	}
+
 	public void setGyroY(String gyroY) {
 		this.gyroY = gyroY;
 	}
+
 	public String getGyroZ() {
 		return gyroZ;
 	}
+
 	public void setGyroZ(String gyroZ) {
 		this.gyroZ = gyroZ;
 	}
+
 	public String getBearing() {
 		return bearing;
 	}
+
 	public void setBearing(String bearing) {
 		this.bearing = bearing;
 	}
+
 	public String getInfraredFrontLeft() {
 		return infraredFrontLeft;
 	}
+
 	public void setInfraredFrontLeft(String infraredFrontLeft) {
 		this.infraredFrontLeft = infraredFrontLeft;
 	}
+
 	public String getInfraredFrontRight() {
 		return infraredFrontRight;
 	}
+
 	public void setInfraredFrontRight(String infraredFrontRight) {
 		this.infraredFrontRight = infraredFrontRight;
 	}
+
 	public String getInfraredRearLeft() {
 		return infraredRearLeft;
 	}
+
 	public void setInfraredRearLeft(String infraredRearLeft) {
 		this.infraredRearLeft = infraredRearLeft;
 	}
+
 	public String getInfraredRearRight() {
 		return infraredRearRight;
 	}
+
 	public void setInfraredRearRight(String infraredRearRight) {
 		this.infraredRearRight = infraredRearRight;
 	}
+
 	public String getUltrasonicFront() {
 		return ultrasonicFront;
 	}
+
 	public void setUltrasonicFront(String ultrasonicFront) {
 		this.ultrasonicFront = ultrasonicFront;
 	}
+
 	public String getUltrasonicRear() {
 		return ultrasonicRear;
 	}
+
 	public void setUltrasonicRear(String ultrasonicRear) {
 		this.ultrasonicRear = ultrasonicRear;
 	}

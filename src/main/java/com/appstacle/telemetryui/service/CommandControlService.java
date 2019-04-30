@@ -26,6 +26,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.vertx.core.Future;
+import io.vertx.core.buffer.Buffer;
 
 @Service
 public class CommandControlService {
@@ -47,22 +48,26 @@ public class CommandControlService {
 		// Create HonoClient and connect to the given Hono instance
 		final Future<HonoClient> clientFuture = this.honoConnector.connectToHonoMessaging();
 
-		log.info("Entered sendCommand " + this.honoTenantID + "::" + honoDeviceId);
+		log.info("Sending Command to" + honoDeviceId + "@" + honoTenantID);
 
 		// Create CommandClient for sending Command to a specific device
 		clientFuture.map(client -> {
 			client.getOrCreateCommandClient(this.honoTenantID, honoDeviceId).map(commandClient -> {
-				log.info("Sending command -- " + this.honoTenantID + "::" + honoDeviceId);
-				commandClient.sendOneWayCommand("test", null);
+				
+                ObjectMapper mapper = new ObjectMapper();
+                // Object to JSON in String
+                try {
+                	String jsonString = mapper.writeValueAsString(command);
+                    commandClient.sendCommand("RoverDriving", Buffer.buffer(jsonString));
+                    log.info("Command successfully sent");
+                } catch (JsonProcessingException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
 				return commandClient;
 			});
 			return client;
 		});
-
-		while (!clientFuture.isComplete()) {
-			/* wait */
-		}
-		log.info("isComplete");
-
 	}
 }

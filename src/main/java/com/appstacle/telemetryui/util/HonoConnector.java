@@ -52,8 +52,6 @@ public class HonoConnector {
 	@Autowired
 	private ApplicationContext appContext;
 
-	final Future<MessageConsumer> consumerFuture = Future.future();
-
 	/**
 	 * Creates a new client to connect to Hono Messaging and forward the received
 	 * messages to a message handler of choice.
